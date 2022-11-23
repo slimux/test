@@ -1,1 +1,35 @@
-<p>article-list works!</p>
+
+<p>List Article</p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Catégorie</th>
+			<th scope="col">Désignation</th>
+			<th scope="col">Marque</th>
+			<th scope="col">Modèle</th>
+      <th scope="col">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr   
+    *ngFor="let article of articles; let i = index" 
+    [class.active]="i == currentIndex" [attr.id]="article.id">
+			<td>    {{ article.category }}</td>
+			<td>  <a routerLink="/articles/{{ article.id }}">  {{ article.desingnation }}</a></td>
+      <td>    {{ article.marque }}</td>
+      <td>    {{ article.modele }}</td>
+      <td>     <button class="badge badge-danger mr-2" (click)="deleteArticle(article.id)">
+        Supprimer
+      </button> 
+      <button 
+      type="submit"
+      class="badge badge-success mb-2"
+      routerLink="/update/{{ article.id }}">
+      Modifier
+    </button></td> 
+		</tr>
+    
+	</tbody>
+
+</table>

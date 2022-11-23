@@ -1,1 +1,149 @@
-<p>article-details works!</p>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentArticle.id">
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentArticle.id" class="edit-form">
+      <h4>Article</h4>
+      <div class="submit-form">
+    
+        <div class="form-group">
+          <form [formGroup]="articleForm">
+         
+            <div class="form-group">
+              <label>category</label>
+              <input
+              type="text" [readonly]="true"
+              class="form-control"
+              id="category"
+              formControlName="category"
+           
+            />   
+  
+            </div>
+    
+    
+            <div class="mb-3">
+              <label for="desingnation" class="form-label">desingnation</label>
+              <input
+                type="text" [readonly]="true"
+                class="form-control"
+                id="desingnation"
+                formControlName="desingnation"
+             
+              />    
+          
+            </div>
+    
+    
+    
+            <div class="mb-3">
+              <label for="desingnation" class="form-label">marques</label>
+              <input
+              type="text"  [readonly]="true"
+              class="form-control"
+              id="marque"
+              formControlName="marque"
+           
+            />   
+        </div>
+    
+    
+    
+    
+             <div class="mb-3">
+              <label for="modele" class="form-label">modele</label>
+              <input
+                type="text" [readonly]="true"
+                class="form-control"
+                id="modele"
+                formControlName="modele" 
+              />
+       
+            </div>
+    
+      <div class="mb-3" *ngIf="articleForm.get('category')?.value == 'Processeur'">
+        <label >Fréquence CPU</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="fcpu"
+      
+        /> 
+         <label >Nombre de core</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="core"
+      
+        /> 
+         <label >Nombre de threads</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="threads"
+ 
+        /> 
+  
+      </div>
+    
+      <div  *ngIf="articleForm.get('category')?.value == 'Carte graphique'">
+        <label >Fréquence du chipset</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="fchipset"
+        
+        />  
+     
+      
+    
+      <label >Overclockée</label>
+ 
+        <input   type="text"
+        class="form-control" [readonly]="true"
+        id="overc"
+        formControlName="overc"
+   
+        />  
+  
+    
+        <label >Fréquence boostée</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="fboost"
+        />
+      </div>
+    
+      <div class="mb-3" *ngIf="articleForm.get('category')?.value == 'Carte mère'">
+    
+        <label >Chipset</label>
+        <input   type="text"
+        class="form-control" [readonly]="true"
+        id="chipset"
+        formControlName="chipset"
+   
+        />   
+        
+        <label >Type de mémoire</label>
+        <input type="text" [readonly]="true"
+        class="form-control"
+        formControlName="tmemoire"
+        />  
+    
+       <label >Capacité maximale de RAM</label>
+        <input type="number" [readonly]="true"
+        class="form-control"
+        formControlName="maxram"
+    
+        />   
+      </div>
+          </form>
+        </div></div>
+      <button
+        type="submit" 
+        class="badge badge-success mb-2"
+        routerLink="/update/{{ currentArticle.id }}"
+      >
+        Update
+      </button>
+    </div>
+  
+  </ng-template>
