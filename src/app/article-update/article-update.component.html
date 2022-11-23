@@ -8,26 +8,15 @@
             <label>category</label>
            <select
           class="custom-select mb-3"
-          (click)="resetCompany(true)"
           (change)="update($event)"
           formControlName="category"
-          [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
         >
         <option value="">choisir category</option>
           <option *ngFor="let category of categories" [ngValue]="category">
             {{ category }}
           </option>
         </select> 
-            <div *ngIf="submitted && f['category'].errors" class="invalid-feedback">
-              <div *ngIf="f['category'].errors['required']">category  is required</div>
-            </div>
           </div>
-  
-  
-  
-  
-  
-  
   
   
           <div class="mb-3">
@@ -37,17 +26,7 @@
               class="form-control"
               id="desingnation"
               formControlName="desingnation"
-              [ngClass]="{ 'is-invalid': submitted && f['desingnation'].errors }"
             />    
-            <div *ngIf="submitted && f['desingnation'].errors" class="invalid-feedback">
-              <div *ngIf="f['desingnation'].errors['required']">modele is required</div>
-              <div *ngIf="f['desingnation'].errors['minlength']">
-                modele must be at least 5 characters
-              </div>
-              <div *ngIf="f['desingnation'].errors['maxlength']">
-                modele must not exceed 45 characters
-              </div>
-            </div>
           </div>
   
   
@@ -58,15 +37,12 @@
           class="custom-select mb-3"
           (change)="update($event)"
           formControlName="marque" 
-          [ngClass]="{ 'is-invalid': submitted && f['marque'].errors }"
         >
           <option value="">choisir marques</option>
           <option *ngFor="let marque of marques" [ngValue]="marque">
             {{ marque }}
           </option>
-        </select> <div *ngIf="submitted && f['marque'].errors" class="invalid-feedback">
-          <div *ngIf="f['marque'].errors['required']">Fullname is required</div>
-        </div>  </div>
+        </select>  </div>
   
   
   
@@ -77,17 +53,8 @@
               type="text"
               class="form-control"
               id="modele"
-              formControlName="modele"   [ngClass]="{ 'is-invalid': submitted && f['modele'].errors }"
             />
-            <div *ngIf="submitted && f['modele'].errors" class="invalid-feedback">
-              <div *ngIf="f['modele'].errors['required']">modele is required</div>
-              <div *ngIf="f['modele'].errors['minlength']">
-                modele must be at least 3 characters
-              </div>
-              <div *ngIf="f['modele'].errors['maxlength']">
-                modele must not exceed 45 characters
-              </div>
-            </div>
+
           </div>
   
     <div class="mb-3" *ngIf="editarticleForm.get('category')?.value == 'Processeur'">
@@ -95,27 +62,17 @@
       <input type="number"
       class="form-control"
       formControlName="fcpu"
-      [ngClass]="{ 'is-invalid': submitted && f['fcpu'].errors }"
-      /> <div *ngIf="submitted && f['fcpu'].errors" class="invalid-feedback">
-        <div *ngIf="f['fcpu'].errors['required']">fcpu is required</div>
-      </div> 
+      /> 
        <label >Nombre de core</label>
       <input type="number"
       class="form-control"
       formControlName="core"
-      [ngClass]="{ 'is-invalid': submitted && f['core'].errors }"
-      /> <div *ngIf="submitted && f['core'].errors" class="invalid-feedback">
-        <div *ngIf="f['core'].errors['required']">core is required</div>
-      </div> 
+      /> 
        <label >Nombre de threads</label>
       <input type="number"
       class="form-control"
       formControlName="threads"
-      [ngClass]="{ 'is-invalid': submitted && f['threads'].errors }"
       /> 
-      <div *ngIf="submitted && f['threads'].errors" class="invalid-feedback">
-        <div *ngIf="f['threads'].errors['required']">threads is required</div>
-      </div> 
     </div>
   
     <div  *ngIf="editarticleForm.get('category')?.value == 'Carte graphique'">
@@ -123,15 +80,10 @@
       <input type="number"
       class="form-control"
       formControlName="fchipset"
-      [ngClass]="{ 'is-invalid': submitted && f['fchipset'].errors }"
       />  
-      <div *ngIf="submitted && f['fchipset'].errors" class="invalid-feedback">
-        <div *ngIf="f['fchipset'].errors['required']">fchipset is required</div>
-      </div> 
-    
-  
+
     <label >Overclockée</label>
-    <div  [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }">
+    <div >
              
       <div class="custom-control custom-radio">
         <input id="oui" type="radio" value="oui" name="overc" formControlName="overc"/>
@@ -142,9 +94,7 @@
          <label  for="non">non</label>
       </div>
     
-   </div>  <div *ngIf="submitted && f['overc'].errors" class="invalid-feedback">
-    <div *ngIf="f['overc'].errors['required']">overc is required</div>
-  </div> 
+   </div>  
   
       <label >Fréquence boostée</label>
       <input type="number"
@@ -160,34 +110,27 @@
       class="form-control"
       id="chipset"
       formControlName="chipset"
-      [ngClass]="{ 'is-invalid': submitted && f['chipset'].errors }"
-      />    <div *ngIf="submitted && f['chipset'].errors" class="invalid-feedback">
-        <div *ngIf="f['chipset'].errors['required']">chipset is required</div>
-      </div> 
+
+      />    
       
       <label >Type de mémoire</label>
       <select
       class="custom-select mb-3"
       (change)="update($event)"
       formControlName="tmemoire"
-      [ngClass]="{ 'is-invalid': submitted && f['tmemoire'].errors }"
+
     >
     <option value="">choisir Memoire</option>
       <option *ngFor="let tmemoire of tmemoires" [ngValue]="tmemoire">
         {{ tmemoire }}
       </option>
-    </select>    <div *ngIf="submitted && f['tmemoire'].errors" class="invalid-feedback">
-      <div *ngIf="f['tmemoire'].errors['required']">tmemoire is required</div>
-    </div> 
+    </select>  
   
      <label >Capacité maximale de RAM</label>
       <input type="number"
       class="form-control"
       formControlName="maxram"
-      [ngClass]="{ 'is-invalid': submitted && f['maxram'].errors }"
-      />   <div *ngIf="submitted && f['maxram'].errors" class="invalid-feedback">
-        <div *ngIf="f['maxram'].errors['required']">maxram is required</div>
-      </div> 
+      /> 
     </div>
   
        <button  type="submit" class="btn btn-primary">Valider</button>

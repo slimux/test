@@ -46,41 +46,12 @@ selected = "----"
 
 
   ngOnInit(): void {
-    this.resetCompany(false)
-    this.id = this.route.snapshot.params["id"]
-    this.editarticleForm = this.fb.group(
-      {
-        category: ['', Validators.required],
-        desingnation: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(45),
-          ],
-        ],
-        marque: ['', Validators.required],
-        modele: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(45),
-          ],
-        ],
-        fcpu: ['',[Validators.pattern('^[0-9]+$'),],],
-        core: ['',[ Validators.pattern('^[0-9]+$'),],],
-        threads: ['',[Validators.pattern('^[0-9]+$'),],],
-        fchipset: ['',[Validators.pattern('^[0-9]+$'),],],
-        overc: ['',[],],
-        fboost: ['',[Validators.pattern('^[0-9]+$'),],],
-        chipset: ['',[],],
-        tmemoire: ['',[],],
-        maxram: ['',[  Validators.pattern('^[0-9]+$'),],],
-      });
+   
 
-  
+    this.id = this.route.snapshot.params["id"]
+ 
         this.articleService.get(this.route.snapshot.params["id"]).subscribe( ( result:any ) => {
+          
         this.editarticleForm = new FormGroup({
          id: new FormControl(result['id']),
          category: new FormControl(result['category']),
@@ -99,7 +70,7 @@ selected = "----"
 
        });   } 
        );  
-    
+
   } 
 
 
@@ -108,40 +79,18 @@ selected = "----"
   }
 
     updateArticle(): void {
+   
     this.submitted = true;
-    if (this.editarticleForm.invalid) {
-      return;
-    } else{  this.articleService.update(this.id, this.editarticleForm.value)     
+     this.articleService.update(this.id, this.editarticleForm.value)     
       .subscribe({
           next: (res) => {
             this.router.navigate(['/articles']);
           },
           error: (e) => console.error(e)
-        });}
+        });
   
 
 }
 
-resetCompany(b: any){
-
-  if(this.editarticleForm.get('category')?.value == 'Processeur')
-  { 
-  this.editarticleForm.controls["fcpu"].setValidators([Validators.required]);
-  this.editarticleForm.controls["threads"].setValidators([Validators.required]);
-  this.editarticleForm.controls["core"].setValidators([Validators.required]);
-  } 
-  if(this.editarticleForm.get('category')?.value == 'Carte graphique')
-  { 
-
-  this.editarticleForm.controls["overc"].setValidators([Validators.required]);
-  this.editarticleForm.controls["fchipset"].setValidators([Validators.required]);
-  }
-  if(this.editarticleForm.get('category')?.value == 'Carte mère')
-  {
-    this.editarticleForm.controls["maxram"].setValidators([Validators.required]);
-    this.editarticleForm.controls["tmemoire"].setValidators([Validators.required]);
-    this.editarticleForm.controls["chipset"].setValidators([Validators.required]);
-  }
-}
   
  }
