@@ -23,12 +23,6 @@
         </div>
 
 
-
-
-
-
-
-
         <div class="mb-3">
           <label for="desingnation" class="form-label">desingnation</label>
           <input
@@ -39,12 +33,12 @@
             [ngClass]="{ 'is-invalid': submitted && f['desingnation'].errors }"
           />    
           <div *ngIf="submitted && f['desingnation'].errors" class="invalid-feedback">
-            <div *ngIf="f['desingnation'].errors['required']">modele is required</div>
+            <div *ngIf="f['desingnation'].errors['required']">desingnation is required</div>
             <div *ngIf="f['desingnation'].errors['minlength']">
-              modele must be at least 5 characters
+              desingnation must be at least 5 characters
             </div>
             <div *ngIf="f['desingnation'].errors['maxlength']">
-              modele must not exceed 45 characters
+              desingnation must not exceed 45 characters
             </div>
           </div>
         </div>
@@ -64,7 +58,7 @@
           {{ marque }}
         </option>
       </select> <div *ngIf="submitted && f['marque'].errors" class="invalid-feedback">
-        <div *ngIf="f['marque'].errors['required']">Fullname is required</div>
+        <div *ngIf="f['marque'].errors['required']">marques is required</div>
       </div>  </div>
 
 
@@ -96,7 +90,7 @@
     formControlName="fcpu"
     [ngClass]="{ 'is-invalid': submitted && f['fcpu'].errors }"
     /> <div *ngIf="submitted && f['fcpu'].errors" class="invalid-feedback">
-      <div *ngIf="f['fcpu'].errors['required']">fcpu is required</div>
+      <div *ngIf="f['fcpu'].errors['required']">Fréquence CPU is required</div>
     </div> 
      <label >Nombre de core</label>
     <input type="number"
@@ -113,7 +107,7 @@
     [ngClass]="{ 'is-invalid': submitted && f['threads'].errors }"
     /> 
     <div *ngIf="submitted && f['threads'].errors" class="invalid-feedback">
-      <div *ngIf="f['threads'].errors['required']">threads is required</div>
+      <div *ngIf="f['threads'].errors['required']">Nombre de threads is required</div>
     </div> 
   </div>
 
@@ -125,7 +119,7 @@
     [ngClass]="{ 'is-invalid': submitted && f['fchipset'].errors }"
     />  
     <div *ngIf="submitted && f['fchipset'].errors" class="invalid-feedback">
-      <div *ngIf="f['fchipset'].errors['required']">fchipset is required</div>
+      <div *ngIf="f['fchipset'].errors['required']">Fréquence du chipset is required</div>
     </div> 
   
 
@@ -142,7 +136,7 @@
     </div>
   
  </div>  <div *ngIf="submitted && f['overc'].errors" class="invalid-feedback">
-  <div *ngIf="f['overc'].errors['required']">overc is required</div>
+  <div *ngIf="f['overc'].errors['required']">Overclockée is required</div>
 </div> 
 
     <label >Fréquence boostée</label>

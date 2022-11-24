@@ -34,7 +34,7 @@ editarticleForm: FormGroup = new FormGroup({
   fboost: new FormControl(''),  
   chipset: new FormControl(''),
   tmemoire: new FormControl(''),
-  maxram: new FormControl(''),
+  maxram: new FormControl('',Validators.minLength(5)),
 });
 
 
@@ -51,7 +51,6 @@ selected = "----"
     this.id = this.route.snapshot.params["id"]
  
         this.articleService.get(this.route.snapshot.params["id"]).subscribe( ( result:any ) => {
-          
         this.editarticleForm = new FormGroup({
          id: new FormControl(result['id']),
          category: new FormControl(result['category']),
@@ -70,7 +69,7 @@ selected = "----"
 
        });   } 
        );  
-
+       this.resetCompany(false);
   } 
 
 
@@ -80,7 +79,11 @@ selected = "----"
 
     updateArticle(): void {
    
-    this.submitted = true;
+      this.submitted = true;
+
+      if (this.editarticleForm.invalid) {
+        return;
+      }
      this.articleService.update(this.id, this.editarticleForm.value)     
       .subscribe({
           next: (res) => {
@@ -88,9 +91,53 @@ selected = "----"
           },
           error: (e) => console.error(e)
         });
-  
 
 }
+resetCompany(b: any){
 
+  if(this.editarticleForm.get('category')?.value == 'Processeur')
+  { 
+  this.editarticleForm.controls["fcpu"].enable()
+  this.editarticleForm.controls["core"].enable()
+  this.editarticleForm.controls["threads"].enable()
+
+  this.editarticleForm.controls["fchipset"].disable()
+  this.editarticleForm.controls["overc"].disable()
+  this.editarticleForm.controls["fboost"].disable()
+
+  this.editarticleForm.controls["maxram"].disable()
+  this.editarticleForm.controls["tmemoire"].disable()
+  this.editarticleForm.controls["chipset"].disable()
+  } 
+  if(this.editarticleForm.get('category')?.value == 'Carte graphique')
+  { 
+    this.editarticleForm.controls["fcpu"].disable()
+    this.editarticleForm.controls["core"].disable()
+    this.editarticleForm.controls["threads"].disable()
+  
+    this.editarticleForm.controls["fchipset"].enable()
+    this.editarticleForm.controls["overc"].enable()
+    this.editarticleForm.controls["fboost"].enable()
+  
+    this.editarticleForm.controls["maxram"].disable()
+    this.editarticleForm.controls["tmemoire"].disable()
+    this.editarticleForm.controls["chipset"].disable()
+  }
+  if(this.editarticleForm.get('category')?.value == 'Carte mère')
+  {
+    this.editarticleForm.controls["fcpu"].disable()
+    this.editarticleForm.controls["core"].disable()
+    this.editarticleForm.controls["threads"].disable()
+  
+    this.editarticleForm.controls["fchipset"].disable()
+    this.editarticleForm.controls["overc"].disable()
+    this.editarticleForm.controls["fboost"].disable()
+  
+    this.editarticleForm.controls["maxram"].enable()
+    this.editarticleForm.controls["tmemoire"].enable()
+    this.editarticleForm.controls["chipset"].enable() 
+
+  }
+}
   
  }

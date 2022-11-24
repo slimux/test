@@ -65,47 +65,44 @@ export class AddArticleComponent implements OnInit {
         fcpu: [
           '',
           [
-            Validators.pattern('^[0-9]+$'),
+            Validators.pattern('^[0-9]+$'),Validators.required
           ],
         ],
         core: [
           '',
           [ 
-            Validators.pattern('^[0-9]+$'),
+            Validators.pattern('^[0-9]+$'),Validators.required
           ],
         ],
         threads: [
           '',
           [
-            Validators.pattern('^[0-9]+$'),
+            Validators.pattern('^[0-9]+$'),Validators.required
           ],
         ],
         fchipset: [
           '',
           [
-            Validators.pattern('^[0-9]+$'),
+            Validators.pattern('^[0-9]+$'),Validators.required
           ],
         ],
-        overc: ['',[],
+        overc: ['',[Validators.required],
         ],
         fboost: ['',[Validators.pattern('^[0-9]+$'),],
         ],
-        chipset: ['',[],
+        chipset: ['',[Validators.required],
         ],
-        tmemoire: ['',[],
+        tmemoire: ['',[Validators.required],
       ],
         maxram: [
           '',
           [ 
-            Validators.pattern('^[0-9]+$'),
+            Validators.pattern('^[0-9]+$'),Validators.required
           ],
         ],
       }
     );
-
-
     this.resetCompany(false);
-
   }
  
   get f(): { [key: string]: AbstractControl } {
@@ -129,6 +126,7 @@ export class AddArticleComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+      
 }
 
 selected = "----"
@@ -141,20 +139,45 @@ resetCompany(b: any){
 
   if(this.articleForm.get('category')?.value == 'Processeur')
   { 
-  this.articleForm.controls["fcpu"].setValidators([Validators.required]);
-  this.articleForm.controls["threads"].setValidators([Validators.required]);
-  this.articleForm.controls["core"].setValidators([Validators.required]);
+  this.articleForm.controls["fcpu"].enable()
+  this.articleForm.controls["core"].enable()
+  this.articleForm.controls["threads"].enable()
+
+  this.articleForm.controls["fchipset"].disable()
+  this.articleForm.controls["overc"].disable()
+  this.articleForm.controls["fboost"].disable()
+
+  this.articleForm.controls["maxram"].disable()
+  this.articleForm.controls["tmemoire"].disable()
+  this.articleForm.controls["chipset"].disable()
   } 
   if(this.articleForm.get('category')?.value == 'Carte graphique')
   { 
-  this.articleForm.controls["overc"].setValidators([Validators.required]);
-  this.articleForm.controls["fchipset"].setValidators([Validators.required]);
+    this.articleForm.controls["fcpu"].disable()
+    this.articleForm.controls["core"].disable()
+    this.articleForm.controls["threads"].disable()
+  
+    this.articleForm.controls["fchipset"].enable()
+    this.articleForm.controls["overc"].enable()
+    this.articleForm.controls["fboost"].enable()
+  
+    this.articleForm.controls["maxram"].disable()
+    this.articleForm.controls["tmemoire"].disable()
+    this.articleForm.controls["chipset"].disable()
   }
   if(this.articleForm.get('category')?.value == 'Carte mère')
   {
-    this.articleForm.controls["maxram"].setValidators([Validators.required]);
-    this.articleForm.controls["tmemoire"].setValidators([Validators.required]);
-    this.articleForm.controls["chipset"].setValidators([Validators.required]);
+    this.articleForm.controls["fcpu"].disable()
+    this.articleForm.controls["core"].disable()
+    this.articleForm.controls["threads"].disable()
+  
+    this.articleForm.controls["fchipset"].disable()
+    this.articleForm.controls["overc"].disable()
+    this.articleForm.controls["fboost"].disable()
+  
+    this.articleForm.controls["maxram"].enable()
+    this.articleForm.controls["tmemoire"].enable()
+    this.articleForm.controls["chipset"].enable() 
 
   }
 }
