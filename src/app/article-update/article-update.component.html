@@ -124,14 +124,14 @@
       </div> 
 
     <label >Overclockée</label>
-    <div  required [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }">
+    <div  [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" >
              
       <div  class="custom-control custom-radio">
-        <input id="oui" type="radio" value="oui" name="overc" formControlName="overc"/>
+        <input required [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" id="oui" type="radio" value="oui" name="overc" formControlName="overc"/>
          <label  for="oui">oui</label>
       </div>
       <div class="custom-control custom-radio">
-         <input id="non" type="radio" value="non" name="overc" formControlName="overc">
+         <input required [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" id="non" type="radio" value="non" name="overc" formControlName="overc">
          <label  for="non">non</label>
       </div>
     
