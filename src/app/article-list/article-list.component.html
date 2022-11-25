@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 		<tr   
-    *ngFor="let article of articles; let i = index" 
+    *ngFor="let article of articles| orderBy: 'desingnation' ; let i = index" 
     [class.active]="i == currentIndex" [attr.id]="article.id">
 			<td>    {{ article.category }}</td>
 			<td>  <a routerLink="/articles/{{ article.id }}">  {{ article.desingnation }}</a></td>

@@ -12,6 +12,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleUpdateComponent } from './article-update/article-update.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {NgPipesModule} from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule, 
     ReactiveFormsModule ,
     HttpClientModule,
+    NgPipesModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )

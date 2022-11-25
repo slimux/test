@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/models/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {ReversePipe} from 'ngx-pipes';
 
 @Component({
   selector: 'app-article-list',
@@ -18,7 +19,10 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+
+      
+     }
 
   ngOnInit(): void {
     this.retrieveArticles();
