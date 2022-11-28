@@ -63,7 +63,7 @@
        
             </div>
     
-      <div class="mb-3" *ngIf="articleForm.get('category')?.value == 'Processeur'">
+      <div formGroupName="caracteristiques" class="mb-3" *ngIf="articleForm.get('category')?.value == 'Processeur'">
         <label >Fréquence CPU</label>
         <input type="number" [readonly]="true"
         class="form-control"
@@ -85,7 +85,7 @@
   
       </div>
     
-      <div  *ngIf="articleForm.get('category')?.value == 'Carte graphique'">
+      <div formGroupName="chipsetgraphique"  *ngIf="articleForm.get('category')?.value == 'Carte graphique'">
         <label >Fréquence du chipset</label>
         <input type="number" [readonly]="true"
         class="form-control"
@@ -112,7 +112,7 @@
         />
       </div>
     
-      <div class="mb-3" *ngIf="articleForm.get('category')?.value == 'Carte mère'">
+      <div formGroupName="caracteristiques1" class="mb-3" *ngIf="articleForm.get('category')?.value == 'Carte mère'">
     
         <label >Chipset</label>
         <input   type="text"

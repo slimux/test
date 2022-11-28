@@ -24,22 +24,28 @@ export class AddArticleComponent implements OnInit {
     "DDR4"
   ]
   submitted = false;
+
   articleForm: FormGroup = new FormGroup({
     category: new FormControl(''),
     desingnation: new FormControl(''),
     marque: new FormControl(''),
     modele: new FormControl(''),
-    fcpu: new FormControl(''),
-    core: new FormControl(''),
-    threads: new FormControl(''),
-    fchipset: new FormControl(''),
-    overc: new FormControl(''),
-    fboost: new FormControl(''),  
-    chipset: new FormControl(''),
-    tmemoire: new FormControl(''),
-    maxram: new FormControl(''),
+    caracteristiques: new FormGroup({
+      fcpu: new FormControl(''),
+      core: new FormControl(''),
+      threads: new FormControl(''),
+    }),
+    chipsetgraphique: new FormGroup({
+      fchipset: new FormControl(''),
+      overc: new FormControl(''),
+      fboost: new FormControl(''),  
+    }),
+    caracteristiques1: new FormGroup({
+          chipset: new FormControl(''),
+          tmemoire: new FormControl(''),
+          maxram: new FormControl(''),
+    })
   });
-
 
   ngOnInit(): void {
     this.articleForm = this.fb.group(
@@ -50,7 +56,8 @@ export class AddArticleComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(5),
-            Validators.maxLength(45),
+            Validators.maxLength(45)
+            
           ],
         ],
         marque: ['', Validators.required],
@@ -61,7 +68,8 @@ export class AddArticleComponent implements OnInit {
             Validators.minLength(3),
             Validators.maxLength(45),
           ],
-        ],
+        ],    caracteristiques : this.fb.group(
+          {
         fcpu: [
           '',
           [
@@ -79,7 +87,9 @@ export class AddArticleComponent implements OnInit {
           [
             Validators.pattern('^[0-9]+$'),Validators.required
           ],
-        ],
+        ],    }
+        ),   chipsetgraphique : this.fb.group(
+          {
         fchipset: [
           '',
           [
@@ -88,8 +98,11 @@ export class AddArticleComponent implements OnInit {
         ],
         overc: ['',[Validators.required],
         ],
-        fboost: ['',[Validators.pattern('^[0-9]+$'),],
-        ],
+        fboost: ['',[Validators.pattern('^[0-9]+$'),], 
+        ],   }
+        ),  
+        caracteristiques1 : this.fb.group(
+          {
         chipset: ['',[Validators.required],
         ],
         tmemoire: ['',[Validators.required],
@@ -99,7 +112,8 @@ export class AddArticleComponent implements OnInit {
           [ 
             Validators.pattern('^[0-9]+$'),Validators.required
           ],
-        ],
+        ]  }
+        )
       }
     );
     this.resetCompany(false);
@@ -139,45 +153,28 @@ resetCompany(b: any){
 
   if(this.articleForm.get('category')?.value == 'Processeur')
   { 
-  this.articleForm.controls["fcpu"].enable()
-  this.articleForm.controls["core"].enable()
-  this.articleForm.controls["threads"].enable()
+  this.articleForm.controls["caracteristiques"].enable()
 
-  this.articleForm.controls["fchipset"].disable()
-  this.articleForm.controls["overc"].disable()
-  this.articleForm.controls["fboost"].disable()
+  this.articleForm.controls["chipsetgraphique"].disable()
 
-  this.articleForm.controls["maxram"].disable()
-  this.articleForm.controls["tmemoire"].disable()
-  this.articleForm.controls["chipset"].disable()
+  this.articleForm.controls["caracteristiques1"].disable()
+
   } 
   if(this.articleForm.get('category')?.value == 'Carte graphique')
   { 
-    this.articleForm.controls["fcpu"].disable()
-    this.articleForm.controls["core"].disable()
-    this.articleForm.controls["threads"].disable()
+    this.articleForm.controls["caracteristiques"].disable()
+
+    this.articleForm.controls["chipsetgraphique"].enable()
   
-    this.articleForm.controls["fchipset"].enable()
-    this.articleForm.controls["overc"].enable()
-    this.articleForm.controls["fboost"].enable()
-  
-    this.articleForm.controls["maxram"].disable()
-    this.articleForm.controls["tmemoire"].disable()
-    this.articleForm.controls["chipset"].disable()
+    this.articleForm.controls["caracteristiques1"].disable()
   }
   if(this.articleForm.get('category')?.value == 'Carte mère')
   {
-    this.articleForm.controls["fcpu"].disable()
-    this.articleForm.controls["core"].disable()
-    this.articleForm.controls["threads"].disable()
+    this.articleForm.controls["caracteristiques"].disable()
+
+    this.articleForm.controls["chipsetgraphique"].disable()
   
-    this.articleForm.controls["fchipset"].disable()
-    this.articleForm.controls["overc"].disable()
-    this.articleForm.controls["fboost"].disable()
-  
-    this.articleForm.controls["maxram"].enable()
-    this.articleForm.controls["tmemoire"].enable()
-    this.articleForm.controls["chipset"].enable() 
+    this.articleForm.controls["caracteristiques1"].enable()
 
   }
 }

@@ -12,16 +12,18 @@
           (change)="update($event)"
           formControlName="category"
           required
-          [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
         >
         <option value="">choisir category</option>
           <option *ngFor="let category of categories" [ngValue]="category">
             {{ category }}
           </option>
         </select> 
-        <div *ngIf="submitted && f['category'].errors" class="invalid-feedback">
-          <div *ngIf="f['category'].errors['required']">category  is required</div>
-        </div>
+        <div  *ngIf="editarticleForm.get('category')?.invalid && (editarticleForm.get('category')?.dirty || editarticleForm.get('category')?.touched)"
+        class="alert alert-danger">
+      <div *ngIf="editarticleForm.get('category')?.errors?.['required']">
+        category is required.
+      </div>
+    </div>
           </div>
   
   
@@ -32,16 +34,21 @@
               class="form-control"
               id="desingnation"
               formControlName="desingnation" minlength="5" maxlength="45" required
-              [ngClass]="{ 'is-invalid': submitted && f['desingnation'].errors }"
-            />           <div *ngIf="submitted && f['desingnation'].errors" class="invalid-feedback">
-              <div *ngIf="f['desingnation'].errors['required']">desingnation is required</div>
-              <div *ngIf="f['desingnation'].errors['minlength']">
-                desingnation must be at least 5 characters
-              </div>
-              <div *ngIf="f['desingnation'].errors['maxlength']">
-                desingnation must not exceed 45 characters
-              </div>
-            </div>
+        
+            />         <div *ngIf="editarticleForm.get('desingnation')?.invalid && (editarticleForm.get('desingnation')?.dirty || editarticleForm.get('desingnation')?.touched)"
+            class="alert alert-danger">
+        
+          <div *ngIf="editarticleForm.get('desingnation')?.errors?.['required']">
+            desingnation is required.
+          </div>
+          <div *ngIf="editarticleForm.get('desingnation')?.errors?.['minlength']">
+            desingnation must be at least 5 characters long.
+          </div>
+          <div *ngIf="editarticleForm.get('desingnation')?.errors?.['maxlength']">
+            desingnation must be at most 45 character long
+          </div>
+        
+        </div>
           </div>
   
   
@@ -53,15 +60,18 @@
           (change)="update($event)"
           formControlName="marque" 
           required
-          [ngClass]="{ 'is-invalid': submitted && f['marque'].errors }"
         >
           <option value="">choisir marques</option>
           <option *ngFor="let marque of marques" [ngValue]="marque">
             {{ marque }}
           </option>
-        </select>  <div *ngIf="submitted && f['marque'].errors" class="invalid-feedback">
-          <div *ngIf="f['marque'].errors['required']">marque is required</div>
-        </div>   </div>
+        </select>   <div *ngIf="editarticleForm.get('marque')?.invalid && (editarticleForm.get('marque')?.dirty || editarticleForm.get('marque')?.touched)"
+        class="alert alert-danger">
+      <div *ngIf="editarticleForm.get('marque')?.errors?.['required']">
+        marque is required.
+      </div>
+    </div>
+    </div>
   
   
   
@@ -73,71 +83,92 @@
               class="form-control"
               formControlName="modele" 
               id="modele"
-              [ngClass]="{ 'is-invalid': submitted && f['modele'].errors }" minlength="3" maxlength="45" required
+            minlength="3" maxlength="45" required
             />
-            <div *ngIf="submitted && f['modele'].errors" class="invalid-feedback">
-              <div *ngIf="f['modele'].errors['required']">modele is required</div>
-              <div *ngIf="f['modele'].errors['minlength']">
-                modele must be at least 3 characters
-              </div>
-              <div *ngIf="f['modele'].errors['maxlength']">
-                modele must not exceed 45 characters
-              </div>
-            </div>
+      
+          <div *ngIf="editarticleForm.get('modele')?.invalid && (editarticleForm.get('modele')?.dirty || editarticleForm.get('modele')?.touched)"
+          class="alert alert-danger">
+      
+        <div *ngIf="editarticleForm.get('modele')?.errors?.['required']">
+          modele is required.
+        </div>
+        <div *ngIf="editarticleForm.get('modele')?.errors?.['minlength']">
+          modele must be at least 3 characters long.
+        </div>
+        <div *ngIf="editarticleForm.get('modele')?.errors?.['maxlength']">
+          modele must be at most 45 character long
+        </div>
+      
+      </div>
           </div>
   
-    <div class="mb-3" *ngIf="editarticleForm.get('category')?.value == 'Processeur'">
+    <div formGroupName="caracteristiques" class="mb-3" *ngIf="editarticleForm.get('category')?.value == 'Processeur'">
       <label >Fréquence CPU</label>
       <input type="number"
       class="form-control"
       formControlName="fcpu" required
-      [ngClass]="{ 'is-invalid': submitted && f['fcpu'].errors }"
-      /> <div *ngIf="submitted && f['fcpu'].errors" class="invalid-feedback">
-        <div *ngIf="f['fcpu'].errors['required']">fcpu is required</div>
-      </div> 
+ 
+      />   <div *ngIf="editarticleForm.get('caracteristiques.fcpu')?.invalid && (editarticleForm.get('caracteristiques.fcpu')?.dirty || editarticleForm.get('caracteristiques.fcpu')?.touched)"
+      class="alert alert-danger">
+      <div *ngIf="editarticleForm.get('caracteristiques.fcpu')?.errors?.['required']">
+        fcpu is required.
+      </div>
+    </div>
        <label >Nombre de core</label>
       <input type="number"
       class="form-control"
       formControlName="core" required
-      [ngClass]="{ 'is-invalid': submitted && f['core'].errors }"
-      /> <div *ngIf="submitted && f['core'].errors" class="invalid-feedback">
-        <div *ngIf="f['core'].errors['required']">core is required</div>
-      </div> 
+   
+      />  <div *ngIf="editarticleForm.get('caracteristiques.core')?.invalid && (editarticleForm.get('caracteristiques.core')?.dirty || editarticleForm.get('caracteristiques.core')?.touched)"
+      class="alert alert-danger">
+    <div *ngIf="editarticleForm.get('caracteristiques.core')?.errors?.['required']">
+      fcpu is required.
+    </div>
+  </div>
        <label >Nombre de threads</label>
       <input type="number"
       class="form-control"
       formControlName="threads" required
-      [ngClass]="{ 'is-invalid': submitted && f['threads'].errors }"
-      />    <div *ngIf="submitted && f['threads'].errors" class="invalid-feedback">
-        <div *ngIf="f['threads'].errors['required']">threads is required</div>
-      </div> 
+   
+      />    <div *ngIf="editarticleForm.get('caracteristiques.threads')?.invalid && (editarticleForm.get('caracteristiques.threads')?.dirty || editarticleForm.get('caracteristiques.threads')?.touched)"
+      class="alert alert-danger">
+    <div *ngIf="editarticleForm.get('caracteristiques.threads')?.errors?.['required']">
+      threads is required.
+    </div>
+  </div>
     </div>
   
-    <div  *ngIf="editarticleForm.get('category')?.value == 'Carte graphique'">
+    <div  formGroupName="chipsetgraphique" *ngIf="editarticleForm.get('category')?.value == 'Carte graphique'">
       <label >Fréquence du chipset</label>
       <input type="number"
       class="form-control"
       formControlName="fchipset" required
-      [ngClass]="{ 'is-invalid': submitted && f['fchipset'].errors }"
-      />   <div *ngIf="submitted && f['fchipset'].errors" class="invalid-feedback">
-        <div *ngIf="f['fchipset'].errors['required']">fchipset is required</div>
-      </div> 
+     
+      />    <div *ngIf="editarticleForm.get('chipsetgraphique.fchipset')?.invalid && (editarticleForm.get('chipsetgraphique.fchipset')?.dirty || editarticleForm.get('chipsetgraphique.fchipset')?.touched)"
+      class="alert alert-danger">
+    <div *ngIf="editarticleForm.get('chipsetgraphique.fchipset')?.errors?.['required']">
+      fchipset is required.
+    </div>
+  </div>
 
     <label >Overclockée</label>
-    <div  [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" >
+    <div  >
              
       <div  class="custom-control custom-radio">
-        <input required [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" id="oui" type="radio" value="oui" name="overc" formControlName="overc"/>
+        <input required  id="oui" type="radio" value="oui" name="overc" formControlName="overc"/>
          <label  for="oui">oui</label>
       </div>
       <div class="custom-control custom-radio">
-         <input required [ngClass]="{ 'is-invalid': submitted && f['overc'].errors }" id="non" type="radio" value="non" name="overc" formControlName="overc">
+         <input required  id="non" type="radio" value="non" name="overc" formControlName="overc">
          <label  for="non">non</label>
       </div>
     
-   </div>   <div *ngIf="submitted && f['overc'].errors" class="invalid-feedback">
-    <div *ngIf="f['overc'].errors['required']">overc is required</div>
-  </div> 
+   </div>  <div *ngIf="editarticleForm.get('chipsetgraphique.overc')?.invalid && (editarticleForm.get('chipsetgraphique.overc')?.dirty || editarticleForm.get('chipsetgraphique.overc')?.touched)"
+   class="alert alert-danger">
+   <div *ngIf="editarticleForm.get('chipsetgraphique.overc')?.errors?.['required']">
+     Overclockée is required.
+   </div>
+   </div>
   
       <label >Fréquence boostée</label>
       <input type="number"
@@ -146,45 +177,54 @@
       />
     </div>
   
-    <div class="mb-3" *ngIf="editarticleForm.get('category')?.value == 'Carte mère'">
+    <div formGroupName="caracteristiques1" class="mb-3" *ngIf="editarticleForm.get('category')?.value == 'Carte mère'">
   
       <label >Chipset</label>
       <input   type="text"
       class="form-control"
       id="chipset"
       formControlName="chipset" required
-      [ngClass]="{ 'is-invalid': submitted && f['chipset'].errors }"
-      />      <div *ngIf="submitted && f['chipset'].errors" class="invalid-feedback">
-        <div *ngIf="f['chipset'].errors['required']">chipset is required</div>
-      </div> 
+    
+      />      <div  *ngIf="editarticleForm.get('caracteristiques1.chipset')?.invalid && (editarticleForm.get('caracteristiques1.chipset')?.dirty || editarticleForm.get('caracteristiques1.chipset')?.touched)"
+      class="alert alert-danger">
+  <div *ngIf="editarticleForm.get('caracteristiques1.chipset')?.errors?.['required']">
+    chipset is required.
+  </div>
+  </div>
       
       <label >Type de mémoire</label>
       <select
       class="custom-select mb-3"
       (change)="update($event)"
       formControlName="tmemoire" required
-      [ngClass]="{ 'is-invalid': submitted && f['tmemoire'].errors }"
+
     >
     <option value="">choisir Memoire</option>
       <option *ngFor="let tmemoire of tmemoires" [ngValue]="tmemoire">
         {{ tmemoire }}
       </option>
-    </select>   <div *ngIf="submitted && f['tmemoire'].errors" class="invalid-feedback">
-      <div *ngIf="f['tmemoire'].errors['required']">tmemoire is required</div>
+    </select>    <div *ngIf="editarticleForm.get('caracteristiques1.tmemoire')?.invalid && (editarticleForm.get('caracteristiques1.tmemoire')?.dirty || editarticleForm.get('caracteristiques1.tmemoire')?.touched)"
+    class="alert alert-danger">
+    <div *ngIf="editarticleForm.get('caracteristiques1.tmemoire')?.errors?.['required']">
+      tmemoire is required.
+    </div>
     </div> 
   
      <label >Capacité maximale de RAM</label>
       <input type="number"
       class="form-control"
       formControlName="maxram" required
-      [ngClass]="{ 'is-invalid': submitted && f['maxram'].errors }"
+ 
       /> 
-      <div *ngIf="submitted && f['maxram'].errors" class="invalid-feedback">
-        <div *ngIf="f['maxram'].errors['required']">maxram is required</div>
-      </div> 
+      <div *ngIf="editarticleForm.get('caracteristiques1.maxram')?.invalid && (editarticleForm.get('caracteristiques1.maxram')?.dirty || editarticleForm.get('caracteristiques1.maxram')?.touched)"
+      class="alert alert-danger">
+      <div *ngIf="editarticleForm.get('caracteristiques1.maxram')?.errors?.['required']">
+        maxram is required.
+      </div>
+      </div>
     </div>
   
-       <button  type="submit" class="btn btn-primary">Valider</button>
+       <button  type="submit" [disabled]="!editarticleForm.valid"  class="btn btn-primary">Valider</button>
         </form>
       </div>
   
